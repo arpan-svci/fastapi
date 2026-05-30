@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from typing import Optional
-from models import UserDetails
+from models import *
 
 
 app = FastAPI()
@@ -43,3 +43,11 @@ def userDetails(user: UserDetails):
 @app.get("/details/{name:str}/{age:int}")
 def getDetails(name :str,age :int):
     return {"message":{"name":name,"age":age}}
+
+@app.post("/createStudent",response_model=StudentResponse)
+def createStudent(student: Student):
+    return {
+        "name":student.name,
+        "age":student.age,
+        "roll":student.roll
+    }
